@@ -102,7 +102,7 @@ class Home extends StatelessWidget {
 
           //tickets
           SizedBox(
-            height: 210,
+            height: 190,
             child: ListView.builder(
                 itemCount: 3,
                 shrinkWrap: true,
@@ -112,7 +112,27 @@ class Home extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return const TicketView();
                 }),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Hotels",
+                  style: TextStyles.heaLineStyle2,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    "View all",
+                    style:
+                        TextStyles.textStyle.copyWith(color: AppColors.primary),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
