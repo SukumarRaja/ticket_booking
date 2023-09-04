@@ -1,18 +1,25 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import '../../data/hotel.dart';
+import '../../data/ticket.dart';
 import '../themes/colors.dart';
 import '../themes/styles.dart';
+import '../widgets/app_layout.dart';
+import '../widgets/double_text_widget.dart';
+import '../widgets/hotel_card.dart';
 import 'ticket_view.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           //head & search
           Container(
@@ -77,23 +84,8 @@ class Home extends StatelessWidget {
                 const Gap(30),
 
                 // upcoming flights
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Upcoming Flights",
-                      style: TextStyles.heaLineStyle2,
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "View all",
-                        style: TextStyles.textStyle
-                            .copyWith(color: AppColors.primary),
-                      ),
-                    ),
-                  ],
-                ),
+                const AppDoubleTextWidget(
+                    bigText: "Upcoming Flights", smallText: "View all"),
               ],
             ),
           ),
@@ -102,37 +94,52 @@ class Home extends StatelessWidget {
 
           //tickets
           SizedBox(
-            height: 190,
+            height: AppLayout.getHeight(context, 190),
             child: ListView.builder(
-                itemCount: 3,
+                itemCount: tickets.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.only(left: 20),
                 itemBuilder: (context, index) {
-                  return const TicketView();
+                  return TicketView(
+                    from: "${tickets[index]['from']['name']}",
+                    fromShort: "${tickets[index]['from']['code']}",
+                    toShort: "${tickets[index]['to']['code']}",
+                    to: "${tickets[index]['to']['name']}",
+                    hours: "${tickets[index]['flying_time']}",
+                    date: "${tickets[index]['date']}",
+                    time: "${tickets[index]['departure_time']}",
+                    ticketNumber: "${tickets[index]['ticket_number']}",
+                  );
                 }),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Hotels",
-                  style: TextStyles.heaLineStyle2,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "View all",
-                    style:
-                        TextStyles.textStyle.copyWith(color: AppColors.primary),
-                  ),
-                ),
-              ],
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child:
+                AppDoubleTextWidget(bigText: "Hotels", smallText: "View all"),
           ),
+
+          const Gap(15),
+
+          SizedBox(
+            height: AppLayout.getHeight(context, 350),
+            child: ListView.builder(
+                itemCount: hotelList.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(left: 20),
+                itemBuilder: (context, index) {
+                  return HotelCard(
+                    name: "${hotelList[index]['place']}",
+                    place: "${hotelList[index]['destination']}",
+                    price: "${hotelList[index]['price']}",
+                    image: "${hotelList[index]['image']}",
+                  );
+                }),
+          ),
+          const Gap(15),
         ],
       ),
     );
