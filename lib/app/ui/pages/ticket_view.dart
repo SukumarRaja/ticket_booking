@@ -180,8 +180,8 @@ class TicketView extends StatelessWidget {
                   )),
                   isCurve == true
                       ? SizedBox(
-                          height: 20,
-                          width: 10,
+                          height: AppLayout.getHeight(context, 20),
+                          width: AppLayout.getWidth(context, 10),
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                                 color: AppColors.bgColor,
