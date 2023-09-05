@@ -15,7 +15,8 @@ class TicketView extends StatelessWidget {
       required this.hours,
       required this.date,
       required this.time,
-      required this.ticketNumber});
+      required this.ticketNumber,
+      this.isCurve = true});
 
   final String fromShort;
   final String toShort;
@@ -25,6 +26,7 @@ class TicketView extends StatelessWidget {
   final String date;
   final String time;
   final String ticketNumber;
+  final bool? isCurve;
 
   @override
   Widget build(BuildContext context) {
@@ -140,17 +142,19 @@ class TicketView extends StatelessWidget {
               color: AppColors.orange,
               child: Row(
                 children: [
-                  SizedBox(
-                    height: AppLayout.getHeight(context, 20),
-                    width: AppLayout.getWidth(context, 10),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: AppColors.bgColor,
-                          borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                    ),
-                  ),
+                  isCurve == true
+                      ? SizedBox(
+                          height: AppLayout.getHeight(context, 20),
+                          width: AppLayout.getWidth(context, 10),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: AppColors.bgColor,
+                                borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                          ),
+                        )
+                      : const SizedBox(),
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -174,17 +178,19 @@ class TicketView extends StatelessWidget {
                       },
                     ),
                   )),
-                  SizedBox(
-                    height: 20,
-                    width: 10,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: AppColors.bgColor,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10))),
-                    ),
-                  ),
+                  isCurve == true
+                      ? SizedBox(
+                          height: 20,
+                          width: 10,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: AppColors.bgColor,
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10))),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

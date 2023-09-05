@@ -5,6 +5,7 @@ import '../themes/styles.dart';
 import '../widgets/app_layout.dart';
 import '../widgets/double_text_widget.dart';
 import '../widgets/search_with_icon.dart';
+import '../widgets/ticket_tabs.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});
@@ -29,46 +30,9 @@ class Search extends StatelessWidget {
           Gap(AppLayout.getHeight(context, 20)),
 
           //menu buttons
-          FittedBox(
-            child: Container(
-              padding: const EdgeInsets.all(3.5),
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(AppLayout.getHeight(context, 50)),
-                color: const Color(0xFFF4F6FD),
-              ),
-              child: Row(
-                children: [
-                  //airlines
-                  Container(
-                    alignment: Alignment.center,
-                    width: size.width * .44,
-                    padding: EdgeInsets.symmetric(
-                        vertical: AppLayout.getHeight(context, 7)),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(
-                                AppLayout.getHeight(context, 50))),
-                        color: Colors.white),
-                    child: const Text("Airline Tickets"),
-                  ),
-
-                  //hotels
-                  Container(
-                    alignment: Alignment.center,
-                    width: size.width * .44,
-                    padding: EdgeInsets.symmetric(
-                        vertical: AppLayout.getHeight(context, 7)),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.horizontal(
-                            right: Radius.circular(
-                                AppLayout.getHeight(context, 50))),
-                        color: Colors.transparent),
-                    child: const Text("Hotels"),
-                  ),
-                ],
-              ),
-            ),
+          const AppTicketTabs(
+            firstTap: "Airplane Tickets",
+            secondTap: "Hotels",
           ),
 
           Gap(AppLayout.getHeight(context, 25)),
